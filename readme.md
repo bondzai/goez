@@ -13,9 +13,9 @@ To use Go-EZ-Toolbox in your project, install it using `go get`:
 
 ```bash
 go get github.com/introbond/go-ez-toolbox/toolbox
+```
 
 ## Usage
-
 ### Pretty Printing JSON
 
 ```go
@@ -33,7 +33,7 @@ func main() {
     // Pretty print specific keys
     toolbox.PPrint(data, "name")
 }
-
+```
 ### Tracking Performance
 
 ```go
