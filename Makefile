@@ -1,3 +1,5 @@
+# Makefile for Golang dev.
+
 # Project-specific settings
 BINARY_NAME := $(shell basename "$$PWD")
 MAIN_GO := ./cmd/main.go # Define the path to your main Go file here
