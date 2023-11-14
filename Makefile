@@ -37,7 +37,7 @@ dogo-init:
 		echo 'Creating default dogo.json configuration file...'; \
 		echo '{' > dogo.json; \
 		echo '    "WorkingDir": ".",' >> dogo.json; \
-		echo '    "SourceDir": ["cmd"],' >> dogo.json; \
+		echo '    "SourceDir": ["."],' >> dogo.json; \
 		echo '    "SourceExt": [".c", ".cpp", ".go", ".h"],' >> dogo.json; \
 		echo '    "BuildCmd": "go build -o bin/$(BINARY_NAME) $(MAIN_GO)",' >> dogo.json; \
 		echo '    "RunCmd": "./bin/$(BINARY_NAME)",' >> dogo.json; \
