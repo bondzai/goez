@@ -79,6 +79,9 @@ gen-gitignore:
 	@echo "*.out" >> .gitignore
 	@echo "# Dependency directories (remove the comment below to include it)" >> .gitignore
 	@echo "# vendor/" >> .gitignore
+	@echo "# custom ignore" >> .gitignore
+	@echo "*.env" >> .gitignore
+	@echo "*.zip" >> .gitignore
 
 # Run tests
 test:
