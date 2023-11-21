@@ -1,3 +1,3 @@
-module github.com/introbond/go-ez-toolbox
+module github.com/zenithero/goez
 
 go 1.20
