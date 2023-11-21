@@ -27,7 +27,7 @@ main-init:
 
 # Install the James-Bond utilities toolbox pkg
 ez-init:
-	go get github.com/introbond/go-ez-toolbox/toolbox
+	go get github.com/bondzai/goez/toolbox
 
 # Install the dogo compiler for automatic rebuilds. Create a dogo.json configuration file if it doesn't exist
 dogo-init:
