@@ -2,8 +2,8 @@ package toolbox
 
 import (
 	"context"
-	"database/sql"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
 	"os/signal"
@@ -11,8 +11,8 @@ import (
 	"time"
 )
 
-// GracefulShutdown handles the graceful shutdown of the server and database.
-func GracefulShutdown(server *http.Server, db *sql.DB, timeout time.Duration) error {
+// GracefulShutdown handles the graceful shutdown of the server and any io.Closer (like a database).
+func GracefulShutdown(server *http.Server, closer io.Closer, timeout time.Duration) error {
 	gracefulStop := make(chan os.Signal, 1)
 	signal.Notify(gracefulStop, syscall.SIGTERM, syscall.SIGINT)
 
@@ -28,11 +28,11 @@ func GracefulShutdown(server *http.Server, db *sql.DB, timeout time.Duration) er
 	}
 	fmt.Println("Server gracefully stopped")
 
-	// Close the database connection
-	if err := db.Close(); err != nil {
-		return fmt.Errorf("error closing database connection: %w", err)
+	// Close the provided io.Closer (e.g., database connection)
+	if err := closer.Close(); err != nil {
+		return fmt.Errorf("error closing resource: %w", err)
 	}
-	fmt.Println("Database connection gracefully closed")
+	fmt.Println("Resource gracefully closed")
 
 	return nil
 }
