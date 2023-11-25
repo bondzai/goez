@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -17,6 +18,7 @@ func GracefulShutdown(server *http.Server, closer io.Closer, timeout time.Durati
 	signal.Notify(gracefulStop, syscall.SIGTERM, syscall.SIGINT)
 
 	<-gracefulStop
+	log.Println("Shutdown signal received")
 
 	// Context with timeout for server shutdown
 	ctx, cancel := context.WithTimeout(context.Background(), timeout)
@@ -26,13 +28,13 @@ func GracefulShutdown(server *http.Server, closer io.Closer, timeout time.Durati
 	if err := server.Shutdown(ctx); err != nil {
 		return fmt.Errorf("error shutting down server: %w", err)
 	}
-	fmt.Println("Server gracefully stopped")
+	log.Println("Server gracefully stopped")
 
 	// Close the provided io.Closer (e.g., database connection)
 	if err := closer.Close(); err != nil {
 		return fmt.Errorf("error closing resource: %w", err)
 	}
-	fmt.Println("Resource gracefully closed")
+	log.Println("Resource gracefully closed")
 
 	return nil
 }
